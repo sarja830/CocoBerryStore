@@ -13,9 +13,10 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
         success: false,
         clientToken: null,
         error: '',
-        instance: {},
+       // instance: {},
         address: '',
-        phoneNo:''
+        phoneNo:'',
+        comment:''
     });
 
     const userId = isAuthenticated() && isAuthenticated().user._id;
@@ -45,6 +46,10 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
         setData({ ...data, phoneNo: event.target.value });
     };
 
+    const handleComment = event => {
+        setData({ ...data, comment: event.target.value });
+    };
+
     const getTotal = () => {
         return products.reduce((currentValue, nextValue) => {
             return currentValue + nextValue.count * nextValue.price;
@@ -63,6 +68,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
 
     let deliveryAddress = data.address;
     let conactNo= data.phoneNo;
+    let comment=data.comment
 
     const buy = () => {
 
@@ -113,12 +119,14 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
             transaction_id: Date.now(),
             amount: getTotal(products),
             address: deliveryAddress,
-            phoneNo:conactNo
+            phoneNo:conactNo,
+            comment:comment
         };
         
 
         createOrder(userId, token, createOrderData)
             .then(response => {
+                alert(`Your Cash on delivery order was successful For order Summary go to dashboard `)
                 emptyCart(() => {
                     setRun(!run); // run useEffect in parent Cart
                     console.log('payment success and empty cart');
@@ -170,6 +178,17 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                             placeholder="Provide your Contact number here..."
                         />
                     </div>
+                    <div className="gorm-group mb-3">
+                        <label className="text-muted">comment</label>
+                        <textarea
+                        type="text"
+                            onChange={handleComment}
+                            className="form-control"
+                            required
+                            value={data.comment}
+                            placeholder="Any additional comment"
+                        />
+                    </div>
                     {/* 
                     <DropIn
                         options={{
@@ -204,7 +223,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
 
     return (
         <div>
-            <h2>Total: ${getTotal()}</h2>
+            <h2>Total: &#8377;{getTotal()}</h2>
             {showLoading(data.loading)}
             {showSuccess(data.success)}
             {showError(data.error)}

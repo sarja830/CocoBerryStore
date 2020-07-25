@@ -1,3 +1,32 @@
+﻿
+STABLE VERSION 2 DEPLOYEMENT
+1. Added manage categories section
+2. added less description in home and more description in product page
+3. improved ui for user History
+4. added additional comment section while ordering
+5. added phone no comment to admindashboard as well
+6. removed link for direct redirect to checkout page from add to cart 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

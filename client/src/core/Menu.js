@@ -40,10 +40,10 @@ const Menu = ({ history }) => (
                     style={isActive(history, "/cart")}
                     to="/cart"
                 >
-                    Cart{" "}
-                    <sup>
+                     Cart{" "}
+                    {/* <sup>
                         <small className="cart-badge">{itemTotal()}</small>
-                    </sup>
+                    </sup>  */}
                 </Link>
             </li>
 

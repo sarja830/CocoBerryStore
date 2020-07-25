@@ -71,15 +71,18 @@ const AddProduct = () => {
                 setValues({ ...values, error: data.error });
             } else {
                 setValues({
-                    ...values,
+                     ...values,
                     name: '',
                     description: '',
                     photo: '',
                     price: '',
                     quantity: '',
                     loading: false,
-                    createdProduct: data.name
-                });
+                  createdProduct: data.name})
+
+                    alert(`new product added`)
+                    window.location.reload();
+        
             }
         });
     };

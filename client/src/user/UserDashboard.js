@@ -79,6 +79,8 @@ const Dashboard = () => {
                                     <div className="active blackquote">Net Amount: {h.amount}</div>
                                     <div  className="active">Address: {h.address}</div>
                                     <div  className="active">Phone no: {h.phoneNo}</div>
+                                    <div  className="active">Comment : {h.comment}</div>
+
                                     <h6>
                                                    
                                                     Purchased :{" "}

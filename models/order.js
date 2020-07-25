@@ -24,6 +24,9 @@ const OrderSchema = new mongoose.Schema(
       type: Number,
       required: true,
       maxlength: 32
+    }, 
+    comment: {type:String,
+      default: "no comments",
     },
     status: {
       type: String,
@@ -31,6 +34,7 @@ const OrderSchema = new mongoose.Schema(
       enum: ["Not processed", "Processing", "Shipped", "Delivered", "Cancelled"] // enum means string objects
     },
     updated: Date,
+   
     user: { type: ObjectId, ref: "User" }
   },
   { timestamps: true }
