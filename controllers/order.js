@@ -4,7 +4,7 @@ const { errorHandler } = require('../helpers/dbErrorHandler');
 // const sgMail = require('@sendgrid/mail');
 // sgMail.setApiKey('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');
 const nodemailer = require('nodemailer');
-const { NODE_MAILER_EMAIL,EMAIL, PASSWORD } = require('../dev');
+const { NODE_MAILER_EMAIL,EMAIL, PASSWORD } = require('../config /keys');
 
 
 const transporter = nodemailer.createTransport({
@@ -88,7 +88,7 @@ exports.create = (req, res) => {
         // email to buyer
         const emailData2 = {
             to: order.user.email,
-            from: 'noreplymykindainsta@gmail.com',
+            from: NODE_MAILER_EMAIL,
             subject: `You order is in process`,
             html: `
             <h1>Hey ${req.profile.name}, Thank you for shopping with us.</h1>
@@ -123,7 +123,7 @@ exports.create = (req, res) => {
 exports.listOrders = (req, res) => {
     Order.find()
         .populate('user', '_id name address')
-        .sort('-created')
+        .sort('-createdAt')
         .exec((err, orders) => {
             if (err) {
                 return res.status(400).json({
@@ -148,17 +148,17 @@ exports.updateOrderStatus = (req, res) => {
         }
 
         order=req.order
-
+        res.json(order);
         // email to buyer
         const emailData2 = {
             to: order.user.email,
-            from: 'noreplymykindainsta@gmail.com',
-            subject: `You order is in process`,
+            from: NODE_MAILER_EMAIL,
+            subject: `You order Status has been updated`,
             html: `
             <h1>Hey ${req.profile.name}, Thank you for shopping with us.</h1>
             <h2>Total products: ${order.products.length}</h2>
             <h2>Transaction ID: ${order.transaction_id}</h2>
-            <h1 style="color:orange">Order status: ${order.status}</h1>
+            <h1 style="color:orange">Order status: ${req.body.status}</h1>
             <h2>Product details:</h2>
             <hr />
             ${order.products
@@ -180,7 +180,7 @@ exports.updateOrderStatus = (req, res) => {
                 console.log("email sent succesfuly to user")
             }
         })  
-        res.json(order);
+       
     });
 };
 

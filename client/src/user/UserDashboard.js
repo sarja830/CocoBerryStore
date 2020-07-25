@@ -65,30 +65,47 @@ const Dashboard = () => {
     const purchaseHistory = history => {
         return (
             <div className="card mb-5">
-                <h3 className="card-header">Purchase history</h3>
+                 <h3 className="card-header">Purchase history <br/><h4 className="badge-primary mt-2 text-wrap">Total Orders  {history.length}</h4></h3>
+                
                 <ul className="list-group">
                     <li className="list-group-item">
+                        
                         {history.map((h, i) => {
                             return (
-                                <div>
+                                <div key={i}>
                                    
-                                    <hr />
-                                    <div key={i} className="highlight">Status: {h.status}</div>
-                                    <div key={i} className="active">Amount: {h.amount}</div>
-                                    <div key={i} className="active">Address: {h.address}</div>
+                                    <hr className="bg-primary " style={{border:"solid 2px indigo"}}/>
+                                    <div  className="highlight bg-warning" >Status: {h.status}</div>
+                                    <div className="active blackquote">Net Amount: {h.amount}</div>
+                                    <div  className="active">Address: {h.address}</div>
+                                    <div  className="active">Phone no: {h.phoneNo}</div>
+                                    <h6>
+                                                   
+                                                    Purchased :{" "}
+                                                    {moment(
+                                                       h.createdAt
+                                                    ).add( 'day').format('LLL')}
+                                                </h6>
                                     {h.products.map((p, i) => {
                                         return (
-                                            <div key={i}>
+                                            <div
+                                        className="mb-4"
+                                        key={i}
+                                        style={{
+                                            padding: "20px",
+                                            border: "1px solid indigo"
+                                        }}
+                                    >
+                                           
+                                             
                                                 <h6>Product name: {p.name}</h6>
                                                 <h6>
                                                     Product price: ${p.price}
                                                 </h6>
                                                 <h6>
-                                                    Purchased :{" "}
-                                                    {moment(
-                                                        p.createdAt
-                                                    ).fromNow()}
+                                                    No of Products: {p.count}
                                                 </h6>
+                                             
                                             </div>
                                         );
                                     })}

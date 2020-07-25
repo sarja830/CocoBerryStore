@@ -21,7 +21,7 @@ const Card = ({
     return (
       showViewProductButton && (
         <Link to={`/product/${product._id}`} className="mr-2">
-          <button className="btn btn-outline-primary mt-2 mb-2 card-btn-1">View Product</button>
+          <button className="btn btn-primary mt-2 mb-2 card-btn-1">View Product</button>
         </Link>
       )
     );
@@ -40,7 +40,7 @@ const Card = ({
   const showAddToCartBtn = showAddToCartButton => {
     return (
       showAddToCartButton && product.quantity>0 && (
-        <button onClick={addToCart} className="btn btn-outline-warning mt-2 mb-2 card-btn-1  ">
+        <button onClick={addToCart} className="btn btn-warning mt-2 mb-2 card-btn-1  ">
           Add to cart
         </button>
       )
@@ -49,9 +49,9 @@ const Card = ({
 
   const showStock = quantity => {
     return quantity > 0 ? (
-      <span className="badge badge-primary badge-pill">In Stock </span>
+      <span className="badge badge-success badge-pill">In Stock </span>
     ) : (
-      <span className="badge badge-primary badge-pill">Out of Stock </span>
+      <span className="badge badge-danger badge-pill">Out of Stock </span>
     );
   };
 
@@ -63,7 +63,7 @@ const Card = ({
       if(event.target.value>product.quantity)
       {
         event.target.value=product.quantity
-        setCount(product.quantity)
+        setCount(0)
         alert(`max quantity can be ${product.quantity}`)
       }
     
@@ -95,7 +95,7 @@ const Card = ({
             removeItem(product._id);
             setRun(!run); // run useEffect in parent Cart
           }}
-          className="btn btn-outline-danger mt-2 mb-2"
+          className="btn btn-danger mt-2 mb-2"
         >
           Remove Product
         </button>

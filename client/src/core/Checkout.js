@@ -65,6 +65,21 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     let conactNo= data.phoneNo;
 
     const buy = () => {
+
+            if(!deliveryAddress) {
+                alert('Address is required');
+                return;
+            }
+            if(!conactNo){
+                alert('phone number is required')
+                return
+            }
+        // rest of code
+    
+
+
+
+
         setData({ loading: true });
         // send the nonce to your server
         // nonce = data.instance.requestPaymentMethod()

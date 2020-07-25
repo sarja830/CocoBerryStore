@@ -12,7 +12,7 @@ const Shop = () => {
     });
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState(false);
-    const [limit, setLimit] = useState(6);
+    const [limit, setLimit] = useState(20);
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
     const [filteredResults, setFilteredResults] = useState([]);
@@ -97,46 +97,51 @@ const Shop = () => {
 
     return (
         <Layout
-            title="Shop Page"
-            description="Search and find books of your choice"
-            className="container-fluid"
+            title="Shop"
+            description="Find our complete range of products here "
+            className='container-fluid'
         >
+           
             <div className="row">
-                <div className="col-4">
+                <div className="col-2">
                     <h4>Filter by categories</h4>
+
+                    {/* to handle the info sent by child component to parent component parent component sent a method handlefilter */}
                     <ul>
-                        <Checkbox
-                            categories={categories}
+                        <Checkbox categories={categories}
                             handleFilters={filters =>
-                                handleFilters(filters, "category")
-                            }
-                        />
+                                handleFilters(filters, 'category')}>
+
+                        </Checkbox>
                     </ul>
 
-                    <h4>Filter by price range</h4>
+                    <h4>Filter by Price</h4>
+
+                    {/* to handle the info sent by child component to parent component parent component sent a method handlefilter */}
                     <div>
-                        <RadioBox
-                            prices={prices}
+                        <RadioBox prices={prices}
                             handleFilters={filters =>
-                                handleFilters(filters, "price")
-                            }
-                        />
+                                handleFilters(filters, 'price')}>
+
+                        </RadioBox>
                     </div>
+                </div>
+                <div className="col-10">
+                   <h2 className="mb-4">Products</h2>             
+                    <div className="row">        
+                     {filteredResults.map((product, i) => (
+                           <div className="col-4 mb-3" key={i}>
+                                <Card product={product}  />
+                        </div>
+                    ))}
+                    <hr/>
+                    {loadMoreButton()}
+                    </div>
+                    
                 </div>
 
-                <div className="col-8">
-                    <h2 className="mb-4">Products</h2>
-                    <div className="row">
-                        {filteredResults.map((product, i) => (
-                            <div key={i} className="col-4 mb-3">
-                                <Card product={product} />
-                            </div>
-                        ))}
-                    </div>
-                    <hr />
-                    {loadMoreButton()}
-                </div>
             </div>
+
         </Layout>
     );
 };
