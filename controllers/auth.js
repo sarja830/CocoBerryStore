@@ -1,8 +1,22 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken'); // to generate signed token
 const expressJwt = require('express-jwt'); // for authorization check
+const _ = require('lodash');
+const { JWT_SECRET, CLIENT_URL } = require('../config /keys');
+const { JWT_RESET_PASSWORD } = require('../config /keys');
+const nodemailer = require('nodemailer');
+const { NODE_MAILER_EMAIL, PASSWORD } = require('../config /keys');
 
-const { JWT_SECRET } = require('../config /keys');
+
+const transporter = nodemailer.createTransport({
+    service:'gmail',
+    auth:{
+        user: NODE_MAILER_EMAIL,
+        pass: PASSWORD
+    }
+})
+
+
 
 // using promise
 exports.signup = (req, res) => {
@@ -97,6 +111,128 @@ exports.isAdmin = (req, res, next) => {
     }
     next();
 };
+
+
+//wheeeveruser request forgot password 
+//a jwt token is created with userid and name
+
+
+
+
+exports.forgotPassword = (req, res) => {
+    const { email } = req.body;
+
+    User.findOne({ email }, (err, user) => {
+        if (err || !user) {
+            return res.status(400).json({
+                error: 'User with that email does not exist'
+            });
+        }
+
+        const token = jwt.sign({ _id: user._id, name: user.name }, JWT_RESET_PASSWORD, {
+            expiresIn: '10m'
+        });
+
+        const emailData = {
+            from: NODE_MAILER_EMAIL,
+            to: email,
+            subject: `Password Reset link`,
+            html: `
+                <h1>Please use the following link to reset your password</h1>
+                <p>${CLIENT_URL}/auth/password/reset/${token}</p>
+                <hr />
+                <p>This email may contain sensetive information</p>
+                <p>${CLIENT_URL}</p>
+            `
+        };
+//the response returned contains the User object name user hence can be resused
+        return user.updateOne({ resetPasswordLink: token }, (err, success) => {
+            if (err) {
+                console.log('RESET PASSWORD LINK ERROR', err);
+                return res.status(400).json({
+                    error: 'Database connection error on user password forgot request'
+                });
+            } else {
+                transporter
+                    .sendMail(emailData)
+                    .then(sent => {
+                        // console.log('SIGNUP EMAIL SENT', sent)
+                        return res.json({
+                            message: `Email has been sent to ${email}. Follow the instruction to activate your account`
+                        });
+                    })
+                    .catch(err => {
+                        // console.log('SIGNUP EMAIL SENT ERROR', err)
+                        return res.json({
+                            message: err.message
+                        });
+                    });
+            }
+        });
+    });
+};
+
+exports.resetPassword = (req, res) => {
+    const { resetPasswordLink, newPassword } = req.body;
+
+    if (resetPasswordLink) {
+        jwt.verify(resetPasswordLink, JWT_RESET_PASSWORD, function(err, decoded) {
+            if (err) {
+                return res.status(400).json({
+                    error: 'Expired link. Try again'
+                });
+            }
+
+            User.findOne({ resetPasswordLink }, (err, user) => {
+                if (err || !user) {
+                    return res.status(400).json({
+                        error: 'Something went wrong. Try later'
+                    });
+                }
+
+                const updatedFields = {
+                    password: newPassword,
+                    resetPasswordLink: ''
+                };
+
+
+//loadash
+                // var dest = {
+                //     p: { x: 10, y: 20},
+                //   };
+                  
+                //   var src = {
+                //     p: { x: 20, z: 30},
+                //   };
+                  
+                //   console.log(_.merge(dest, src));
+                //   console.log(_.extend(dest, src));
+                  
+
+                user = _.extend(user, updatedFields);
+                console.log(user)
+                user.save((err, result) => {
+                    if (err) {
+                        return res.status(400).json({
+                            error: 'Error resetting user password'
+                        });
+                    }
+                    res.json({
+                        message: `Great! Now you can login with your new password`
+                    });
+                });
+            });
+        });
+    }
+};
+
+
+
+
+
+
+
+
 
 /**
  * google login full

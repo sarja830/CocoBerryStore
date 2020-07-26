@@ -4,11 +4,12 @@ import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
 import { getPurchaseHistory } from "./apiUser";
 import moment from "moment";
-
+import Spinner from 'react-bootstrap/Spinner'
 const Dashboard = () => {
     const [history, setHistory] = useState([]);
-
-    const {
+   const [loading, setLoading] = useState(false)
+   
+   const {
         user: { _id, name, email, role }
     } = isAuthenticated();
     const token = isAuthenticated().token;
@@ -17,13 +18,16 @@ const Dashboard = () => {
         getPurchaseHistory(userId, token).then(data => {
             if (data.error) {
                 console.log(data.error);
+                setLoading(false)
             } else {
+                setLoading(false)
                 setHistory(data);
             }
         });
     };
 
     useEffect(() => {
+        setLoading(true)
         init(_id, token);
     }, []);
 
@@ -65,9 +69,14 @@ const Dashboard = () => {
     const purchaseHistory = history => {
         return (
             <div className="card mb-5">
-                 <h3 className="card-header">Purchase history <br/><h4 className="badge-primary mt-2 text-wrap">Total Orders  {history.length}</h4></h3>
-                
+                <div className="card-header"><h3 >Purchase history</h3> 
+                    </div> 
+                 
+           
+        {loading?<div className="text-center mt-3 mb-3"><Spinner animation="grow" variant="success" size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>:      
                 <ul className="list-group">
+                <li className=" bg-info list-group-item text-center">   Total Orders  {history.length}
+                 </li>
                     <li className="list-group-item">
                         
                         {history.map((h, i) => {
@@ -115,7 +124,7 @@ const Dashboard = () => {
                             );
                         })}
                     </li>
-                </ul>
+                </ul>}
             </div>
         );
     };

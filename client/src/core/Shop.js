@@ -5,6 +5,7 @@ import { getCategories, getFilteredProducts } from "./apiCore";
 import Checkbox from "./Checkbox";
 import RadioBox from "./RadioBox";
 import { prices } from "./fixedPrices";
+import Spinner from "react-bootstrap/esm/Spinner";
 
 const Shop = () => {
     const [myFilters, setMyFilters] = useState({
@@ -16,7 +17,7 @@ const Shop = () => {
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(0);
     const [filteredResults, setFilteredResults] = useState([]);
-
+const [loading, setLoading] = useState(false)
     const init = () => {
         getCategories().then(data => {
             if (data.error) {
@@ -29,10 +30,13 @@ const Shop = () => {
 
     const loadFilteredResults = newFilters => {
         // console.log(newFilters);
+        
         getFilteredProducts(skip, limit, newFilters).then(data => {
             if (data.error) {
+                setLoading(false)
                 setError(data.error);
             } else {
+                setLoading(false)
                 setFilteredResults(data.data);
                 setSize(data.size);
                 setSkip(0);
@@ -66,6 +70,7 @@ const Shop = () => {
     };
 
     useEffect(() => {
+        setLoading(true)
         init();
         loadFilteredResults(skip, limit, myFilters.filters);
     }, []);
@@ -128,7 +133,9 @@ const Shop = () => {
                 </div>
                 <div className="col-10">
                    <h2 className="mb-4">Products</h2>             
-                    <div className="row">        
+                    {loading?
+                    <div className="text-center "  style={{marginTop:"200px"}}><Spinner animation="border" variant="warning"  size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>
+                    :<div className="row">        
                      {filteredResults.map((product, i) => (
                            <div className="col-4 mb-3" key={i}>
                                 <Card product={product}  />
@@ -136,7 +143,7 @@ const Shop = () => {
                     ))}
                     <hr/>
                     {loadMoreButton()}
-                    </div>
+                    </div>}
                     
                 </div>
 

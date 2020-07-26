@@ -7,6 +7,10 @@ STABLE VERSION 2 DEPLOYEMENT
 5. added phone no comment to admindashboard as well
 6. removed link for direct redirect to checkout page from add to cart 
 
+STABLE VERSION 3 DEPLOYEMENT
+1. added forgot password functionality
+2. added spinners to show loading
+
 
 
 

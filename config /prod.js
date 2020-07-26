@@ -3,6 +3,8 @@ module.exports={
     DATABASE:process.env.DATABASE,
     EMAIL:process.env.EMAIL,
     NODE_MAILER_EMAIL:process.env.NODE_MAILER_EMAIL,
-    PASSWORD:process.env.PASSWORD
+    PASSWORD:process.env.PASSWORD,
+    JWT_RESET_PASSWORD:process.env.JWT_RESET_PASSWORD,
+    CLIENT_URL:process.env.CLIENT_URL
 }
 
