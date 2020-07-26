@@ -9,7 +9,7 @@ STABLE VERSION 2 DEPLOYEMENT
 
 STABLE VERSION 3 DEPLOYEMENT
 1. added forgot password functionality
-2. added spinners to show loading
+2. added spinners to show loading in userHistory ,home and shop
 
 
 
