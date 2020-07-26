@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import ShowImage from './ShowImage';
 import moment from 'moment';
-import { addItem, updateItem, removeItem } from './cartHelpers';
+import { addItem, updateItem, removeItem, itemTotal } from './cartHelpers';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import Modal from 'react-bootstrap/Modal'
+
+import Button from 'react-bootstrap/Button'
+
+
 
 const Card = ({
   product,
@@ -28,7 +35,9 @@ const Card = ({
   };
   const addToCart = () => {
     // console.log('added');
+    toast.warning(`item added to cart.Total ${itemTotal()} items in cart`);
     addItem(product, setRedirect(true));
+    
   };
 
   const shouldRedirect = redirect => {
@@ -92,6 +101,7 @@ const Card = ({
       showRemoveProductButton && (
         <button
           onClick={() => {
+            toast.error(`1 item removed from cart`);
             removeItem(product._id);
             setRun(!run); // run useEffect in parent Cart
           }}
@@ -102,9 +112,40 @@ const Card = ({
       )
     );
   };
+
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div className="card mb=3">
-      <div className="card-header card-header-1 ">{product.name}</div>
+          <div className="card-header card-header-1" >{product.name}  
+             <div className="badge  badge-warning badge-pill">
+              <span className="text-right" onClick={handleShow} >
+               Demo
+              </span>
+              </div>
+              <Modal size="lg" show={show} onHide={handleClose}>
+                
+              <iframe src={`${product.link}?autoplay=1`}
+                frameborder='0'
+                allow='autoplay; encrypted-media'
+                allowfullscreen='true'
+                title='video'
+                height="550"
+                
+               />
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
+                  
+              </Modal>
+
+
+
+          </div>
       <div className="card-body">
         {/* {shouldRedirect(redirect)} */}
         <ShowImage item={product} url="product" />
@@ -116,7 +157,17 @@ const Card = ({
         <br />
 
         {showViewButton(showViewProductButton)}
-
+        <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
         {showAddToCartBtn(showAddToCartButton)}
 
         {showRemoveButton(showRemoveProductButton)}

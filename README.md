@@ -11,7 +11,9 @@ STABLE VERSION 3 DEPLOYEMENT
 1. added forgot password functionality
 2. added spinners to show loading in userHistory ,home and shop
 
-
+STABLE VERSION 4 DEPLOYEMENT
+1. added short video for demo of product
+2. created interface for admin to add and update the link
 
 
 

@@ -140,7 +140,7 @@ const Dashboard = () => {
                 <div className="col-9">
                     {userInfo()}
                     {purchaseHistory(history)}
-                    {console.log(history)}
+                    
                 </div>
             </div>
         </Layout>

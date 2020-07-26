@@ -14,6 +14,7 @@ const AddProduct = () => {
         shipping: '',
         quantity: '',
         photo: '',
+        link:'',
         loading: false,
         error: '',
         createdProduct: '',
@@ -30,6 +31,7 @@ const AddProduct = () => {
         category,
         shipping,
         quantity,
+        link,
         loading,
         error,
         createdProduct,
@@ -77,6 +79,7 @@ const AddProduct = () => {
                     photo: '',
                     price: '',
                     quantity: '',
+                    link:'',
                     loading: false,
                   createdProduct: data.name})
 
@@ -94,6 +97,10 @@ const AddProduct = () => {
                 <label className="btn btn-secondary">
                     <input onChange={handleChange('photo')} type="file" name="photo" accept="image/*" />
                 </label>
+            </div>
+            <div className="form-group">
+                <label className="text-muted">Youtube Link</label>
+                <input onChange={handleChange('link')} className="form-control" type='text' value={link} placeholder="add link src link from embed in youtube share"/>
             </div>
 
             <div className="form-group">

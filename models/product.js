@@ -36,6 +36,12 @@ const productSchema = new mongoose.Schema(
             data: Buffer,
             contentType: String
         },
+        link: {
+            type: String,
+           default:"",
+            maxlength: 250
+            
+        },
         shipping: {
             required: false,
             type: Boolean

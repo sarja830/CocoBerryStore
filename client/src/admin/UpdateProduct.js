@@ -14,6 +14,7 @@ const UpdateProduct = ({ match }) => {
         shipping: '',
         quantity: '',
         photo: '',
+        link:"",
         loading: false,
         error: false,
         createdProduct: '',
@@ -33,6 +34,7 @@ const UpdateProduct = ({ match }) => {
         quantity,
         loading,
         error,
+        link,
         createdProduct,
         redirectToProfile,
         formData
@@ -52,6 +54,7 @@ const UpdateProduct = ({ match }) => {
                     category: data.category._id,
                     shipping: data.shipping,
                     quantity: data.quantity,
+                    link:data.link,
                     formData: new FormData()
                 });
                 // load categories
@@ -96,6 +99,7 @@ const UpdateProduct = ({ match }) => {
                     photo: '',
                     price: '',
                     quantity: '',
+                    link:'' ,
                     loading: false,
                     error: false,
                     redirectToProfile: true,
@@ -112,6 +116,11 @@ const UpdateProduct = ({ match }) => {
                 <label className="btn btn-secondary">
                     <input onChange={handleChange('photo')} type="file" name="photo" accept="image/*" />
                 </label>
+            </div>
+
+            <div className="form-group">
+                <label className="text-muted"> Youtube link</label>
+                <input onChange={handleChange('link')} className="form-control" type="text" placeholder="add link src link from embed in youtube share" value={link} />
             </div>
 
             <div className="form-group">

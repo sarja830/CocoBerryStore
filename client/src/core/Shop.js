@@ -120,7 +120,7 @@ const [loading, setLoading] = useState(false)
                         </Checkbox>
                     </ul>
 
-                    <h4>Filter by Price</h4>
+                    <h4>Filter by Price(in &#8377;) </h4>
 
                     {/* to handle the info sent by child component to parent component parent component sent a method handlefilter */}
                     <div>
