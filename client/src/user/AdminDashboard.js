@@ -2,6 +2,8 @@ import React from "react";
 import Layout from "../core/Layout";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 const AdminDashboard = () => {
     const {
@@ -64,10 +66,10 @@ const AdminDashboard = () => {
             description={`G'day ${name}!`}
             className="container-fluid"
         >
-            <div className="row">
-                <div className="col-3">{adminLinks()}</div>
-                <div className="col-9">{adminInfo()}</div>
-            </div>
+            <Row>
+                <Col xl="3" lg="3" md="12">{adminLinks()}</Col>
+                <Col xl="3" lg="3" md="12">{adminInfo()}</Col>
+            </Row>
         </Layout>
     );
 };

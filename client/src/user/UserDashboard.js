@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { getPurchaseHistory } from "./apiUser";
 import moment from "moment";
 import Spinner from 'react-bootstrap/Spinner'
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 const Dashboard = () => {
     const [history, setHistory] = useState([]);
    const [loading, setLoading] = useState(false)
@@ -135,14 +137,14 @@ const Dashboard = () => {
             description={`G'day ${name}!`}
             className="container-fluid"
         >
-            <div className="row">
-                <div className="col-3">{userLinks()}</div>
-                <div className="col-9">
+            <Row>
+                <Col xl="3" lg="3" md="12">{userLinks()}</Col>
+                <Col xl="9" lg="9" md="12">
                     {userInfo()}
                     {purchaseHistory(history)}
                     
-                </div>
-            </div>
+                </Col>
+            </Row>
         </Layout>
     );
 };

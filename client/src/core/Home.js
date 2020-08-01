@@ -4,6 +4,8 @@ import { getProducts } from './apiCore';
 import Card from './Card';
 import Search from './Search';
 import Spinner from 'react-bootstrap/esm/Spinner';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col'
 
 const Home = () => {
     const [productsBySell, setProductsBySell] = useState([]);
@@ -52,28 +54,27 @@ const [loading2, setLoading2] = useState(false)
         </h2>
         {loading1?
          <div className="text-center "  style={{margin:"200px auto"}}><Spinner animation="border" variant="warning"  size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>
-        :<div className="row">
+        :<Row>
             {productsBySell.map((product, i) => (
-            <div className="col-4 mb-3" key={i}>
-                <Card product={product} />
-            </div>
+            <Col xl={3} lg={4} md={4} sm className="mb-3"  key={i}>
+            <Card product={product} />
+        </Col>
             ))}
-        </div>}
-
+         </Row>}
 <hr/>
         < h2 className="mb-4">
             New Arrivals
         </h2>
         {loading2?
-         <div className="text-center "  style={{marginTop:"200px"}}><Spinner animation="border" variant="warning"  size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>
+         <div className="text-center "  style={{margin:"200px auto"}}><Spinner animation="border" variant="warning"  size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>
         :
-        <div className="row">
+        <Row>
             {productsByArrival.map((product, i) => (
-                <div className="col-4 mb-3" key={i}>
+                <Col xl={3} lg={4} md={4} sm className="mb-3"  key={i}>
                     <Card product={product} />
-                </div>
+                </Col>
             ))}
-        </div>}
+        </Row>}
 
     </Layout >
     );

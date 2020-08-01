@@ -4,6 +4,8 @@ import Layout from './Layout';
 import { getCart } from './cartHelpers';
 import Card from './Card';
 import Checkout from './Checkout';
+import Row from 'react-bootstrap/esm/Row';
+import Col from 'react-bootstrap/esm/Col';
 
 const Cart = () => {
     const [items, setItems] = useState([]);
@@ -45,15 +47,15 @@ const Cart = () => {
             description="Manage your cart items. Add remove checkout or continue shopping."
             className="container-fluid"
         >
-            <div className="row">
-                <div className="col-6">{items.length > 0 ? showItems(items) : noItemsMessage()}</div>
+            <Row >
+                <Col sm className="mb-5">{items.length > 0 ? showItems(items) : noItemsMessage()}</Col>
 
-                <div className="col-6">
+                <Col sm >
                     <h2 className="mb-4">Your cart summary</h2>
                     <hr />
                     <Checkout products={items} setRun={setRun} run={run} />
-                </div>
-            </div>
+                </Col>
+            </Row>
         </Layout>
     );
 };

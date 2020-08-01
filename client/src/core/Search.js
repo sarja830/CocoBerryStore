@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getCategories, list } from "./apiCore";
 import Card from "./Card";
+import Col from "react-bootstrap/esm/Col";
+import Row from "react-bootstrap/esm/Row";
 
 const Search = () => {
     const [data, setData] = useState({
@@ -67,13 +69,13 @@ const Search = () => {
                     {searchMessage(searched, results)}
                 </h2>
 
-                <div className="row">
+                <Row >
                     {results.map((product, i) => (
-                        <div className="col-4 mb-3">
+                        <Col xl={3} lg={4} md={4} sm className="mb-3" key={i}>
                             <Card key={i} product={product} />
-                        </div>
+                        </Col>
                     ))}
-                </div>
+                </Row>
             </div>
         );
     };

@@ -6,6 +6,8 @@ import Checkbox from "./Checkbox";
 import RadioBox from "./RadioBox";
 import { prices } from "./fixedPrices";
 import Spinner from "react-bootstrap/esm/Spinner";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 const Shop = () => {
     const [myFilters, setMyFilters] = useState({
@@ -107,8 +109,8 @@ const [loading, setLoading] = useState(false)
             className='container-fluid'
         >
            
-            <div className="row">
-                <div className="col-2">
+            <Row>
+                <Col xl="2" md="12"  lg="3">
                     <h4>Filter by categories</h4>
 
                     {/* to handle the info sent by child component to parent component parent component sent a method handlefilter */}
@@ -130,24 +132,24 @@ const [loading, setLoading] = useState(false)
 
                         </RadioBox>
                     </div>
-                </div>
-                <div className="col-10">
+                </Col>
+                <Col xl="10" md lg="9">
                    <h2 className="mb-4">Products</h2>             
                     {loading?
-                    <div className="text-center "  style={{marginTop:"200px"}}><Spinner animation="border" variant="warning"  size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>
-                    :<div className="row">        
+                    <div className="text-center "  style={{margin:"200px auto"}}><Spinner animation="border" variant="warning"  size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>
+                    :<Row>        
                      {filteredResults.map((product, i) => (
-                           <div className="col-4 mb-3" key={i}>
+                           <Col xl="4" lg="6" className="mb-4" key={i}>
                                 <Card product={product}  />
-                        </div>
+                        </Col>
                     ))}
                     <hr/>
                     {loadMoreButton()}
-                    </div>}
+                    </Row>}
                     
-                </div>
+                </Col>
 
-            </div>
+            </Row>
 
         </Layout>
     );

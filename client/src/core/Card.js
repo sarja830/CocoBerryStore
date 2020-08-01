@@ -35,9 +35,10 @@ const Card = ({
   };
   const addToCart = () => {
     // console.log('added');
-    toast.warning(`item added to cart.Total ${itemTotal()} items in cart`);
+    var link=(<Link to='/cart'>My Cart</Link>);
+    toast.warning(`item added to cart.Total ${itemTotal()} ${link} items in cart`);
     addItem(product, setRedirect(true));
-    
+
   };
 
   const shouldRedirect = redirect => {
@@ -48,7 +49,7 @@ const Card = ({
 
   const showAddToCartBtn = showAddToCartButton => {
     return (
-      showAddToCartButton && product.quantity>0 && (
+      showAddToCartButton && product.quantity > 0 && (
         <button onClick={addToCart} className="btn btn-warning mt-2 mb-2 card-btn-1  ">
           Add to cart
         </button>
@@ -60,25 +61,24 @@ const Card = ({
     return quantity > 0 ? (
       <span className="badge badge-success badge-pill">In Stock </span>
     ) : (
-      <span className="badge badge-danger badge-pill">Out of Stock </span>
-    );
+        <span className="badge badge-danger badge-pill">Out of Stock </span>
+      );
   };
 
   const handleChange = productId => event => {
     setRun(!run); // run useEffect in parent Cart
-     
+
     setCount(event.target.value < 1 ? 1 : event.target.value);
     if (event.target.value >= 1) {
-      if(event.target.value>product.quantity)
-      {
-        event.target.value=product.quantity
+      if (event.target.value > product.quantity) {
+        event.target.value = product.quantity
         setCount(0)
         alert(`max quantity can be ${product.quantity}`)
       }
-    
+
       updateItem(productId, event.target.value);
 
-      
+
     }
   };
 
@@ -90,7 +90,7 @@ const Card = ({
             <div className="input-group-prepend">
               <span className="input-group-text">Adjust Quantity</span>
             </div>
-            <input type="number" className="form-control" value={count}  onChange={handleChange(product._id)} />
+            <input type="number" className="form-control" value={count} onChange={handleChange(product._id)} />
           </div>
         </div>
       )
@@ -121,35 +121,35 @@ const Card = ({
 
   return (
     <div className="card mb=3">
-          <div className="card-header card-header-1" >{product.name}  
-             <div className="badge  badge-warning badge-pill">
-              <span className="text-right" onClick={handleShow} >
-               Demo
+      <div className="card-header card-header-1" >{product.name}
+        <div className="badge  badge-warning badge-pill">
+          <span className="text-right" onClick={handleShow} >
+            Demo
               </span>
-              </div>
-              <Modal size="lg" show={show} onHide={handleClose}>
-                
-              <iframe src={`${product.link}?autoplay=1`}
-                frameborder='0'
-                allow='autoplay; encrypted-media'
-                allowfullscreen='true'
-                title='video'
-                height="550"
-                
-               />
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
+        </div>
+        <Modal size="lg" show={show} onHide={handleClose}>
+
+          <iframe src={`${product.link}?autoplay=1`}
+            frameborder='0'
+            allow='autoplay; encrypted-media'
+            allowfullscreen='true'
+            title='video'
+            height="550"
+
+          />
+          <Button variant="secondary" onClick={handleClose}>
+            Close
                   </Button>
-                  
-              </Modal>
+
+        </Modal>
 
 
 
-          </div>
+      </div>
       <div className="card-body">
         {/* {shouldRedirect(redirect)} */}
         <ShowImage item={product} url="product" />
-        {showViewProductButton?<p className="card-p  mt-2">{product.description.substring(0, 20)} </p>:<p className="card-p  mt-2">{product.description} </p>}
+        {showViewProductButton ? <p className="card-p  mt-2">{product.description.substring(0, 20)} </p> : <p className="card-p  mt-2">{product.description} </p>}
         <p className="card-p black-10">&#8377; {product.price}</p>
         <p className="black-9">Category: {product.category && product.category.name}</p>
         <p className="black-8">Added on {moment(product.createdAt).fromNow()}</p>
@@ -158,16 +158,16 @@ const Card = ({
 
         {showViewButton(showViewProductButton)}
         <ToastContainer
-position="top-right"
-autoClose={2000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-/>
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         {showAddToCartBtn(showAddToCartButton)}
 
         {showRemoveButton(showRemoveProductButton)}

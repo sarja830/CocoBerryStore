@@ -16,7 +16,10 @@ STABLE VERSION 4 DEPLOYEMENT
 2. created interface for admin to add and update the link
 
 
-
+STABLE VERSION 5 DEPLOYEMENT
+1. first mobile responsive version
+2. added loading to product page
+3. added burger menu navbar
 
 
 
