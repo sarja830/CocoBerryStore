@@ -155,7 +155,7 @@ exports.updateOrderStatus = (req, res) => {
             from: NODE_MAILER_EMAIL,
             subject: `You order Status has been updated`,
             html: `
-            <h1>Hey ${req.profile.name}, Thank you for shopping with us.</h1>
+            <h1>Hey ${order.user.name}, Thank you for shopping with us.</h1>
             <h2>Total products: ${order.products.length}</h2>
             <h2>Transaction ID: ${order.transaction_id}</h2>
             <h1 style="color:orange">Order status: ${req.body.status}</h1>

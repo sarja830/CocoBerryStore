@@ -47,7 +47,7 @@ const [loading2, setLoading2] = useState(false)
     }, []);
 
     return (
-        <Layout title="Home Page" description="Node React ecomeerce" className="container-fluid">
+        <Layout title="Home" description="The Indian Craftstore" className="container-fluid">
         <Search />
         <h2 className="mb-4 ">
             Best Sellers

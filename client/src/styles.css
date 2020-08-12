@@ -115,3 +115,34 @@
         background-position: 0% 50%;
     }
 }
+
+
+
+a.social:hover {
+    transform: translateY(-2px);
+  }
+  a.social {
+    margin: 0 1rem;
+    transition: transform 250ms;
+    display: inline-block;
+  }
+
+a.youtube {
+    color: #eb3223;
+  }
+  
+  a.facebook {
+    color: #4267B2;
+  }
+  
+  a.twitter {
+    color: #49a1eb;
+  }
+  
+  a.instagram {
+    color: white;
+  }
+
+  a.google {
+    color: #49a1eb;
+  }

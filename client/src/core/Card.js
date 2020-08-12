@@ -8,9 +8,14 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import Modal from 'react-bootstrap/Modal'
 
 import Button from 'react-bootstrap/Button'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
-
+import {
+  faYoutube,
+  faFacebook,
+  faTwitter,
+  faInstagram
+} from "@fortawesome/free-brands-svg-icons";
 const Card = ({
   product,
   showViewProductButton = true,
@@ -122,17 +127,21 @@ const Card = ({
   return (
     <div className="card mb=3">
       <div className="card-header card-header-1" >{product.name}
-        <div className="badge  badge-warning badge-pill">
-          <span className="text-right" onClick={handleShow} >
+        {/* <div className="badge  badge-warning badge-pill"> */}
+          {/* <span className="text-right" onClick={handleShow} >
             Demo
-              </span>
-        </div>
+              </span> */}
+              <button onClick={handleShow} className="ml-4  btn btn-light fa-lg" style={{"color":" #eb3223"}}>
+              <FontAwesomeIcon icon={faYoutube}  />
+                    </button>
+        {/* </div> */}
         <Modal size="lg" show={show} onHide={handleClose}>
 
           <iframe src={`${product.link}?autoplay=1`}
-            frameborder='0'
+            frameBorder='0'
+            
             allow='autoplay; encrypted-media'
-            allowfullscreen='true'
+            allowFullScreen={true}
             title='video'
             height="550"
 

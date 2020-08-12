@@ -105,7 +105,7 @@ const [loading, setLoading] = useState(false)
     return (
         <Layout
             title="Shop"
-            description="Find our complete range of products here "
+            description="Check out our complete range of products here "
             className='container-fluid'
         >
            
