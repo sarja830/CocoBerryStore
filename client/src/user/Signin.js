@@ -3,6 +3,9 @@ import { Redirect, Link } from "react-router-dom";
 import Layout from "../core/Layout";
 import { signin, authenticate, isAuthenticated } from "../auth";
 
+import Google from './Google';
+import Facebook from './Facebook';
+
 const Signin = () => {
     const [values, setValues] = useState({
         email: "",
@@ -19,6 +22,17 @@ const Signin = () => {
         setValues({ ...values, error: false, [name]: event.target.value });
     };
 
+    const informParent = response => {
+        authenticate(response, () => {
+                setValues({
+                    ...values,
+                    redirectToReferrer: true
+                });
+            });
+        };
+    
+
+
     const clickSubmit = event => {
         event.preventDefault();
         setValues({ ...values, error: false, loading: true });
@@ -28,7 +42,7 @@ const Signin = () => {
             } else {
                 authenticate(data, () => {
                     setValues({
-                        ...values,
+                        // ...values,
                         redirectToReferrer: true
                     });
                 });
@@ -100,6 +114,8 @@ const Signin = () => {
         >
             {showLoading()}
             {showError()}
+            {/* <Google informParent={informParent} /> */}
+            <Facebook informParent={informParent} />
             {signinForm()}
             {redirectUser()}
             <hr></hr>
