@@ -23,13 +23,17 @@ const Signin = () => {
     };
 
     const informParent = response => {
-        authenticate(response, () => {
+        console.log("infoparent respnse",response);
+        if (response.data.error) {
+            setValues({ ...values, error: response.data.error, loading: false });
+        } else {
+        authenticate(response.data, () => {
                 setValues({
-                    ...values,
                     redirectToReferrer: true
                 });
             });
-        };
+        }
+    };
     
 
 
@@ -114,7 +118,7 @@ const Signin = () => {
         >
             {showLoading()}
             {showError()}
-            {/* <Google informParent={informParent} /> */}
+            <Google informParent={informParent} />
             <Facebook informParent={informParent} />
             {signinForm()}
             {redirectUser()}

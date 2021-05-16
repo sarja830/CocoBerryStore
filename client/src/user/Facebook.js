@@ -1,7 +1,7 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import axios from 'axios';
-import { API } from "../config";
+import { API,REACT_APP_FACEBOOK_APP_ID } from "../config";
 
 const Facebook = ({ informParent = f => f }) => {
     const responseFacebook = response => {
@@ -18,12 +18,13 @@ const Facebook = ({ informParent = f => f }) => {
             })
             .catch(error => {
                 console.log('FACEBOOK SIGNIN ERROR', error.response);
+                informParent(error.response);
             });
     };
     return (
         <div className="pb-3">
             <FacebookLogin
-                appId={`${process.env.REACT_APP_FACEBOOK_APP_ID}`}
+                appId={`${REACT_APP_FACEBOOK_APP_ID}`}
                 autoLoad={false}
                 callback={responseFacebook}
                 render={renderProps => (

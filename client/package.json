@@ -7,6 +7,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.13.1",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "axios": "^0.21.1",
     "braintree-web": "^3.45.0",
     "braintree-web-drop-in-react": "^1.0.7",
     "compression": "^1.7.4",
@@ -19,6 +20,7 @@
     "react-bootstrap": "^1.2.2",
     "react-dom": "^16.8.6",
     "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.2.2",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "react-toastify": "^6.0.8"
