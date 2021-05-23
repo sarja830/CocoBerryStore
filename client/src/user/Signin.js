@@ -113,7 +113,7 @@ const Signin = () => {
     return (
         <Layout
             title="Signin"
-            description="Signin to Node React E-commerce App"
+            description="Signin to The Indian Craft Store"
             className="container col-md-8 offset-md-2"
         >
             {showLoading()}
@@ -123,7 +123,7 @@ const Signin = () => {
             {signinForm()}
             {redirectUser()}
             <hr></hr>
-            <Link to="/auth/password/forgot" className="btn btn-sm btn-outline-danger">
+            <Link to="/auth/password/forgot" className="btn btn-sm btn-outline-danger mb-3">
                     Forgot Password
                 </Link>
         </Layout>
