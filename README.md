@@ -21,7 +21,13 @@ STABLE VERSION 5 DEPLOYEMENT
 2. added loading to product page
 3. added burger menu navbar
 
-
+STABLE VERSION 6 DEPLOYEMENT
+1. added  corousel for related  products
+2. corrected load more
+3. corrected images format problem
+4. remove description from home cards
+5. minor correction in messages.
+6. added google facebook login
 
 
 

@@ -19,7 +19,7 @@ const Layout = ({
     className,
     children
 }) => (
-        <div>
+        <div style = {{height:"100%"}}>
             <Menu />
             <div className="jumbotron">
                 <h2>{title}</h2>
@@ -61,7 +61,7 @@ const Layout = ({
 
                         </div>
                         <div className="mb-2 mt-2" style={{ color: "white" }}>
-                            Designed by  <strong style={{ color: "orange" }} > Sarthak</strong>
+                            Designed by  <strong style={{ color: "orange" }} > The Indian Craft Store Team</strong>
                         </div>
                         </Col>
                     </Row>

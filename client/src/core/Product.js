@@ -59,9 +59,13 @@ const [loading1, setLoading1] = useState(false);
                     {product && product.description && <Card product={product} showViewProductButton={false} />}
                 </Col>
             }
-          
+          <hr/>
+
                 <Col xl={12} lg={12} md={12} sm className="mb-3">
-                    <h4>Related products</h4>
+                < h2 className="mb-4">
+           Related Products
+        </h2>
+                  
                     {loading1?   <div className="text-center "  style={{margin:"200px auto"}}><Spinner animation="border" variant="warning"  size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>
         :<>
                     {/* {
