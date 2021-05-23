@@ -41,7 +41,8 @@ const Card = ({
   const addToCart = () => {
     // console.log('added');
     var link=(<Link to='/cart'>My Cart</Link>);
-    toast.warning(`item added to cart.Total ${itemTotal()} ${link} items in cart`);
+    var q =itemTotal()+1;
+    toast.warning(`item added to cart. Total ${q} items in the cart`);
     addItem(product, setRedirect(true));
 
   };
@@ -158,10 +159,24 @@ const Card = ({
       <div className="card-body">
         {/* {shouldRedirect(redirect)} */}
         <ShowImage item={product} url="product" />
-        {showViewProductButton ? <p className="card-p  mt-2">{product.description.substring(0, 20)} </p> : <p className="card-p  mt-2">{product.description} </p>}
-        <p className="card-p black-10">&#8377; {product.price}</p>
-        <p className="black-9">Category: {product.category && product.category.name}</p>
-        <p className="black-8">Added on {moment(product.createdAt).fromNow()}</p>
+        {(() => {
+        if (!showViewProductButton) {
+          return (
+            <p className="card-p  mt-2">{product.description} </p>
+          )
+        }
+      })()}
+        {/* {showViewProductButton ? <p className="card-p  mt-2">{product.description.substring(0, 20)} </p> : <p className="card-p  mt-2">{product.description} </p>} */}
+        <p className="card-p black-10">Just for &#8377; {product.price}</p>
+        {(() => {
+        if (!showViewProductButton) {
+          return (
+            <p className="black-9">Category: {product.category && product.category.name}</p>
+          )
+        }
+      })()}
+        {/* <p className="black-9">Category: {product.category && product.category.name}</p> */}
+        <p className="black-8">Added {moment(product.createdAt).fromNow()}</p>
         {showStock(product.quantity)}
         <br />
 
@@ -177,6 +192,7 @@ const Card = ({
           draggable
           pauseOnHover
         />
+        
         {showAddToCartBtn(showAddToCartButton)}
 
         {showRemoveButton(showRemoveProductButton)}
