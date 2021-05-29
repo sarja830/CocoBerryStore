@@ -41,12 +41,12 @@ const Forgot = ({ history }) => {
     const passwordForgotForm = () => (
         <form>
             <div className="form-group">
-                <label className="text-muted">Email</label>
-                <input onChange={handleChange('email')} value={email} type="email" className="form-control" />
+                <label className="text-muted">Registered Email</label>
+                <input onChange={handleChange('email')} placeholder="Enter your registered Email" value={email} type="email" className="form-control" />
             </div>
 
             <div>
-                <button className="btn btn-primary" onClick={clickSubmit}>
+                <button className="btn btn-primary mb-5"  onClick={clickSubmit}>
                     {buttonText}
                 </button>
             </div>
@@ -54,7 +54,7 @@ const Forgot = ({ history }) => {
     );
 
     return (
-        <Layout>
+        <Layout title="Reset Password" description="Type in your registered Email">
             <div className="col-md-6 offset-md-3">
                 <ToastContainer />
                 <h1 className="p-5 text-center">Forgot password</h1>
