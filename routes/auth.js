@@ -7,6 +7,8 @@ const {
     signout,
     forgotPassword,
     resetPassword,
+    googleLogin,
+    facebookLogin
     
 } = require("../controllers/auth");
 
@@ -28,7 +30,9 @@ router.get("/signout", signout);
 
 router.put('/forgot-password', forgotPasswordValidator, runValidation, forgotPassword);
 router.put('/reset-password', resetPasswordValidator, runValidation, resetPassword);
-
+// google and facebook
+router.post('/google-login', googleLogin);
+router.post('/facebook-login', facebookLogin);
 
 
 module.exports = router;

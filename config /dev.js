@@ -6,5 +6,7 @@ module.exports={
     PASSWORD:"Mykindainsta9993",
     EMAIL:"sarthjain830@gmail.com",
     JWT_RESET_PASSWORD:"secret",
-    CLIENT_URL:"http://localhost:3000"
+    CLIENT_URL:"http://localhost:3000",
+    GOOGLE_CLIENT_ID:"437349581282-tndkqm60j0k0qrr07j9j5117tmii30ua.apps.googleusercontent.com"
+    
 }

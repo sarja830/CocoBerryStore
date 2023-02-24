@@ -50,7 +50,7 @@ const Cart = () => {
             <Row >
                 <Col sm className="mb-5">{items.length > 0 ? showItems(items) : noItemsMessage()}</Col>
 
-                <Col sm >
+                <Col sm className="mb-5">
                     <h2 className="mb-4">Your cart summary</h2>
                     <hr />
                     <Checkout products={items} setRun={setRun} run={run} />

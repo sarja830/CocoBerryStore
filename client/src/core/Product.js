@@ -5,6 +5,7 @@ import Card from './Card';
 import Row from 'react-bootstrap/esm/Row';
 import Col from 'react-bootstrap/esm/Col';
 import Spinner from 'react-bootstrap/esm/Spinner';
+import Carousel from 'react-bootstrap/Carousel'
 
 const Product = props => {
     const [product, setProduct] = useState({});
@@ -54,20 +55,44 @@ const [loading1, setLoading1] = useState(false);
 {loading?
          <div className="text-center "  style={{margin:"200px auto"}}><Spinner animation="border" variant="warning"  size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>
         :
-                <Col xl={8} lg={8} md={12} sm className="mb-5">
+                <Col xl={12} lg={12} md={12} sm className="mb-5">
                     {product && product.description && <Card product={product} showViewProductButton={false} />}
                 </Col>
             }
-          
-                <Col xl={4} lg={4} md={12} sm className="mb-3">
-                    <h4>Related products</h4>
+          <hr/>
+
+                <Col xl={12} lg={12} md={12} sm className="mb-3">
+                < h2 className="mb-4">
+           Related Products
+        </h2>
+                  
                     {loading1?   <div className="text-center "  style={{margin:"200px auto"}}><Spinner animation="border" variant="warning"  size="lg"> <span className="sr-only">Loading...</span> </Spinner></div>
         :<>
-                    {relatedProduct.map((p, i) => (
+                    {/* {
+                        
+                    relatedProduct.map((p, i) => (
                         <div className="mb-3" key={i}>
                             <Card product={p} />
                         </div>
-                    ))}</>}
+                    ))
+                    
+                    } */}
+                    <Carousel fade>
+  
+                    {
+                        
+                        relatedProduct.map((p, i) => (
+                            <Carousel.Item interval={0}>
+                            <div style={{padding:"200px auto"}} className="text-center " key={i}>
+                                <Card product={p} />
+                            </div>
+                            </Carousel.Item>
+                        ))
+                        
+                        }
+
+</Carousel>
+                    </>}
                 </Col>
             </Row>
         </Layout>

@@ -3,6 +3,9 @@ import { Redirect, Link } from "react-router-dom";
 import Layout from "../core/Layout";
 import { signin, authenticate, isAuthenticated } from "../auth";
 
+import Google from './Google';
+import Facebook from './Facebook';
+
 const Signin = () => {
     const [values, setValues] = useState({
         email: "",
@@ -19,6 +22,21 @@ const Signin = () => {
         setValues({ ...values, error: false, [name]: event.target.value });
     };
 
+    const informParent = response => {
+        console.log("infoparent respnse",response);
+        if (response.data.error) {
+            setValues({ ...values, error: response.data.error, loading: false });
+        } else {
+        authenticate(response.data, () => {
+                setValues({
+                    redirectToReferrer: true
+                });
+            });
+        }
+    };
+    
+
+
     const clickSubmit = event => {
         event.preventDefault();
         setValues({ ...values, error: false, loading: true });
@@ -28,7 +46,7 @@ const Signin = () => {
             } else {
                 authenticate(data, () => {
                     setValues({
-                        ...values,
+                        // ...values,
                         redirectToReferrer: true
                     });
                 });
@@ -95,15 +113,17 @@ const Signin = () => {
     return (
         <Layout
             title="Signin"
-            description="Signin to Node React E-commerce App"
+            description="Signin to The Indian Craft Store"
             className="container col-md-8 offset-md-2"
         >
             {showLoading()}
             {showError()}
+            <Google informParent={informParent} />
+            <Facebook informParent={informParent} />
             {signinForm()}
             {redirectUser()}
             <hr></hr>
-            <Link to="/auth/password/forgot" className="btn btn-sm btn-outline-danger">
+            <Link to="/auth/password/forgot" className="btn btn-sm btn-outline-danger mb-3">
                     Forgot Password
                 </Link>
         </Layout>

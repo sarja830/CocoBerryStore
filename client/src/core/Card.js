@@ -8,9 +8,14 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import Modal from 'react-bootstrap/Modal'
 
 import Button from 'react-bootstrap/Button'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
-
+import {
+  faYoutube,
+  faFacebook,
+  faTwitter,
+  faInstagram
+} from "@fortawesome/free-brands-svg-icons";
 const Card = ({
   product,
   showViewProductButton = true,
@@ -36,7 +41,8 @@ const Card = ({
   const addToCart = () => {
     // console.log('added');
     var link=(<Link to='/cart'>My Cart</Link>);
-    toast.warning(`item added to cart.Total ${itemTotal()} ${link} items in cart`);
+    var q =itemTotal()+1;
+    toast.warning(`item added to cart. Total ${q} items in the cart`);
     addItem(product, setRedirect(true));
 
   };
@@ -122,17 +128,21 @@ const Card = ({
   return (
     <div className="card mb=3">
       <div className="card-header card-header-1" >{product.name}
-        <div className="badge  badge-warning badge-pill">
-          <span className="text-right" onClick={handleShow} >
+        {/* <div className="badge  badge-warning badge-pill"> */}
+          {/* <span className="text-right" onClick={handleShow} >
             Demo
-              </span>
-        </div>
+              </span> */}
+              <button onClick={handleShow} className="ml-4  btn btn-light fa-lg" style={{"color":" #eb3223"}}>
+              <FontAwesomeIcon icon={faYoutube}  />
+                    </button>
+        {/* </div> */}
         <Modal size="lg" show={show} onHide={handleClose}>
 
           <iframe src={`${product.link}?autoplay=1`}
-            frameborder='0'
+            frameBorder='0'
+            
             allow='autoplay; encrypted-media'
-            allowfullscreen='true'
+            allowFullScreen={true}
             title='video'
             height="550"
 
@@ -149,10 +159,24 @@ const Card = ({
       <div className="card-body">
         {/* {shouldRedirect(redirect)} */}
         <ShowImage item={product} url="product" />
-        {showViewProductButton ? <p className="card-p  mt-2">{product.description.substring(0, 20)} </p> : <p className="card-p  mt-2">{product.description} </p>}
-        <p className="card-p black-10">&#8377; {product.price}</p>
-        <p className="black-9">Category: {product.category && product.category.name}</p>
-        <p className="black-8">Added on {moment(product.createdAt).fromNow()}</p>
+        {(() => {
+        if (!showViewProductButton) {
+          return (
+            <p className="card-p  mt-2">{product.description} </p>
+          )
+        }
+      })()}
+        {/* {showViewProductButton ? <p className="card-p  mt-2">{product.description.substring(0, 20)} </p> : <p className="card-p  mt-2">{product.description} </p>} */}
+        <p className="card-p black-10">Just for &#8377; {product.price}</p>
+        {(() => {
+        if (!showViewProductButton) {
+          return (
+            <p className="black-9">Category: {product.category && product.category.name}</p>
+          )
+        }
+      })()}
+        {/* <p className="black-9">Category: {product.category && product.category.name}</p> */}
+        <p className="black-8">Added {moment(product.createdAt).fromNow()}</p>
         {showStock(product.quantity)}
         <br />
 
@@ -168,6 +192,7 @@ const Card = ({
           draggable
           pauseOnHover
         />
+        
         {showAddToCartBtn(showAddToCartButton)}
 
         {showRemoveButton(showRemoveProductButton)}

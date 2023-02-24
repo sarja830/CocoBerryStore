@@ -5,6 +5,7 @@ module.exports={
     NODE_MAILER_EMAIL:process.env.NODE_MAILER_EMAIL,
     PASSWORD:process.env.PASSWORD,
     JWT_RESET_PASSWORD:process.env.JWT_RESET_PASSWORD,
-    CLIENT_URL:process.env.CLIENT_URL
+    CLIENT_URL:process.env.CLIENT_URL,
+    GOOGLE_CLIENT_ID:process.env.GOOGLE_CLIENT_ID
 }
 

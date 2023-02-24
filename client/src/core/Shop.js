@@ -105,7 +105,7 @@ const [loading, setLoading] = useState(false)
     return (
         <Layout
             title="Shop"
-            description="Find our complete range of products here "
+            description="Check out our complete range of products here "
             className='container-fluid'
         >
            
@@ -143,14 +143,18 @@ const [loading, setLoading] = useState(false)
                                 <Card product={product}  />
                         </Col>
                     ))}
-                    <hr/>
-                    {loadMoreButton()}
+                   
+                  
                     </Row>}
                     
                 </Col>
 
             </Row>
-
+            <Row>
+            <Col xl="2" md="12"  lg="3"></Col>
+            <Col xl="10" md lg="9"> {loadMoreButton()}</Col>
+            </Row>
+            
         </Layout>
     );
 };
